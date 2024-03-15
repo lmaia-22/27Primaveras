@@ -32,7 +32,8 @@ export class CountdownComponent implements OnInit, AfterViewInit {
       spline.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode', myVariables).then(() => {
             this.canvasLoaded = true;
             const obj = spline.findObjectById('a6450dc5-4d27-43ad-837a-c72978938638'); // Adjust this line based on the actual API
-            console.log("Aqui" + obj);
+            console.log("Aqui", JSON.stringify(obj?.position));
+
             if (obj) {
               this.splineInstance = spline;
               this.splineObject = obj;
@@ -66,8 +67,20 @@ export class CountdownComponent implements OnInit, AfterViewInit {
 
   updateCountdownPosition(x: number, y: number) {
     if (this.countdownRef && this.countdownRef.nativeElement) {
-      this.renderer.setStyle(this.countdownRef.nativeElement, 'left', `${x}px`);
-      this.renderer.setStyle(this.countdownRef.nativeElement, 'top', `${y}px`);
+      const countdownElement = this.countdownRef.nativeElement;
+
+      const canvasCenterX = this.canvas3dRef.nativeElement.offsetWidth / 2;
+      const canvasCenterY = this.canvas3dRef.nativeElement.offsetHeight / 2;
+
+      console.log(canvasCenterX);
+      console.log(canvasCenterY);
+      const actualX = canvasCenterX + x;
+      const actualY = canvasCenterY + y;
+
+      this.renderer.setStyle(this.countdownRef.nativeElement, 'left', `${actualX}px`);
+      this.renderer.setStyle(this.countdownRef.nativeElement, 'top', `${actualY}px`);
+    } else {
+      console.error('Countdown element not available.');
     }
   }
 
