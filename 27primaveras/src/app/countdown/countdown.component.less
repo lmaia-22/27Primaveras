@@ -1,0 +1,20 @@
+// countdown.component.less
+.spline-container {
+    position: relative; // Ensures that the countdown can be positioned relative to this container
+    width: 100%; // Adjust based on your layout
+    height: 100%; // Adjust based on your layout
+  
+    canvas {
+      width: 100%; // Ensures canvas fills the container
+      height: 100%; // Adjust height as needed
+    }
+  
+    .countdown-overlay {
+      position: absolute; // Allows for dynamic positioning within the container
+      top: 0; // Default position, will be overwritten dynamically
+      left: 0; // Default position, will be overwritten dynamically
+      z-index: 10; // Ensures the countdown appears above the Spline canvas
+      // Further styling as needed for the countdown
+    }
+  }
+  
