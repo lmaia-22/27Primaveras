@@ -67,15 +67,14 @@ export class CountdownComponent implements OnInit, AfterViewInit {
 
   updateCountdownPosition(x: number, y: number) {
     if (this.countdownRef && this.countdownRef.nativeElement) {
-      const countdownElement = this.countdownRef.nativeElement;
-
+      this.splineInstance.setVariables({ Time: '' });
       const canvasCenterX = this.canvas3dRef.nativeElement.offsetWidth / 2;
       const canvasCenterY = this.canvas3dRef.nativeElement.offsetHeight / 2;
 
       console.log(canvasCenterX);
       console.log(canvasCenterY);
-      const actualX = canvasCenterX + x;
-      const actualY = canvasCenterY + y;
+      const actualX = canvasCenterX - x;
+      const actualY = canvasCenterY + 270;
 
       this.renderer.setStyle(this.countdownRef.nativeElement, 'left', `${actualX}px`);
       this.renderer.setStyle(this.countdownRef.nativeElement, 'top', `${actualY}px`);
