@@ -22,9 +22,10 @@ export class HeaderComponent {
   
       ngOnInit() {
           this.items = [
+            {label: '27 Springs'},
               {label: 'Home', icon: 'pi pi-fw pi-home', command:(click)=>{this.router.navigate(['/home'])}},
               {label: 'Guest List', icon: 'pi pi-fw pi-user', command:(click)=>{this.router.navigate(['/guest-list'])}},
-              {label: 'Venue', icon: 'pi pi-spin pi-spinner', command:(click)=>{this.router.navigate(['/venue'])}},
+              {label: 'Venue', icon: 'pi pi-spin pi-spinner' },
           ];
           this.activeItem = this.items[0];
       }

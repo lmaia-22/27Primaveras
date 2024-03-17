@@ -294,13 +294,7 @@ export class GuestService {
                     name: 'Cristina',
                     description: 'gay senior',
                     image: '2_LM.jpg',
-                },
-                {
-                    id: '49',
-                    name: 'Ruben',
-                    description: 'gay senior',
-                    image: '2_LM.jpg',
-                },
+                }
             ];
         }
     }

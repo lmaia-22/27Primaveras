@@ -10,6 +10,7 @@ import { Application } from '@splinetool/runtime';
   styleUrl: './countdown.component.less'
 })
 export class CountdownComponent implements OnInit, AfterViewInit {
+
   leftTime!: number;
   config!: CountdownConfig;
   @ViewChild('canvas3d') canvas3dRef!: ElementRef<HTMLCanvasElement>;
@@ -74,8 +75,8 @@ export class CountdownComponent implements OnInit, AfterViewInit {
 
       console.log(canvasCenterX);
       console.log(canvasCenterY);
-      const actualX = canvasCenterX - x;
-      const actualY = canvasCenterY + 270;
+      const actualX = canvasCenterX - x -100;
+      const actualY = canvasCenterY + 280;
 
       this.renderer.setStyle(this.countdownRef.nativeElement, 'left', `${actualX}px`);
       this.renderer.setStyle(this.countdownRef.nativeElement, 'top', `${actualY}px`);
