@@ -2,7 +2,7 @@
     <canvas #canvas3d></canvas>
     <!-- @if(canvasLoaded) { -->
         <div #countdown class="countdown-overlay">
-            <countdown [config]="config" (event)="onEvent($event)"></countdown>
+            <countdown class="countdown" [config]="config" (event)="onEvent($event)"></countdown>
         </div>
     <!-- } -->
 </div>

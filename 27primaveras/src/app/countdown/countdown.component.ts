@@ -38,6 +38,7 @@ export class CountdownComponent implements OnInit, AfterViewInit {
               this.splineInstance = spline;
               this.splineObject = obj;
               this.updateCountdownPosition(obj.position.x, obj.position.y);
+              //this.updateCountdownPosition1(spline, obj);
             }
           }).catch((error) => {
             console.error("Error loading Spline scene:", error);
@@ -46,7 +47,7 @@ export class CountdownComponent implements OnInit, AfterViewInit {
   }
 
   private initializeCountdown() {
-    const targetDate = new Date(Date.UTC(2024, 3, 22, 23, 59, 0)); // 22 April 2024
+    const targetDate = new Date(Date.UTC(2024, 3, 21, 23, 59, 0)); // 22 April 2024
     const now = new Date();
     this.leftTime = Math.round((targetDate.getTime() - now.getTime()) / 1000);
 
@@ -84,10 +85,9 @@ export class CountdownComponent implements OnInit, AfterViewInit {
   }
 
   updateCountdownPosition1(spline: Application, obj: Object) {
-    spline.setVariable('Time', `${"<countdown [config]='config' (event)='onEvent($event)'></countdown>"}`);
+    let normalDate = new Date(this.leftTime).toLocaleString('en-GB',{timeZone:'UTC'})
+    spline.setVariable('Time', normalDate);
   }
-
-
 
   onEvent(event: CountdownEvent) {
     if (event.action === 'notify' || event.action === 'done') {
