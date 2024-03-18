@@ -27,13 +27,13 @@ export class CountdownComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       const canvas = this.canvas3dRef.nativeElement;
       this.splineInstance = new Application(canvas);
-        this.splineInstance.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode')
+        this.splineInstance.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode',
+        {
+          credentials: 'include',
+          mode: 'no-cors',
+        })
           .then(() => {
-            const obj = this.splineInstance.findObjectById('a2731e08-d431-4639-b2e1-a188b2ec85e8');
-            if (obj) {
-              this.splineObject = obj;
               this.renderer.setStyle(this.canvas3dRef.nativeElement, 'height', `${window.innerHeight}px` )
-            }
           })
           .catch((error) => {
             console.error("Error loading Spline scene:", error);
