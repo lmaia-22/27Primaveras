@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2, HostListener, Input  } from '@angular/core';
 import { CountdownConfig, CountdownModule, CountdownEvent  } from 'ngx-countdown';
 import { Application } from '@splinetool/runtime';
+import { PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-countdown',
@@ -18,33 +20,53 @@ export class CountdownComponent implements OnInit, AfterViewInit {
   splineInstance!: Application;
   splineObject!: Object;
   canvasLoaded: boolean = false;
-  constructor(private renderer: Renderer2) {}
+  @Input() headerHeight: number = 0;
+  
+  constructor(
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
     this.initializeCountdown();
   }
 
   ngAfterViewInit() {
-    if (typeof window !== 'undefined') {
-      // Safe to use window here
-      const myVariables = { Time: 'Loading...' };
+    if (isPlatformBrowser(this.platformId)) {
       const canvas = this.canvas3dRef.nativeElement;
-      const spline = new Application(canvas);
-      spline.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode', myVariables).then(() => {
-            this.canvasLoaded = true;
-            const obj = spline.findObjectById('a6450dc5-4d27-43ad-837a-c72978938638'); // Adjust this line based on the actual API
+      this.splineInstance = new Application(canvas);
+      if (window.innerWidth < 500 && window.innerHeight < 950) {
+        const myVariables = { Time: 'Loading...' };
+        this.splineInstance.load('https://prod.spline.design/MfCboj1b8P8qQb-n/scene.splinecode', myVariables)
+          .then(() => {
+            const obj = this.splineInstance.findObjectById('a2731e08-d431-4639-b2e1-a188b2ec85e8');
             console.log("Aqui", JSON.stringify(obj?.position));
-
             if (obj) {
-              this.splineInstance = spline;
               this.splineObject = obj;
               this.updateCountdownPosition(obj.position.x, obj.position.y);
-              //this.updateCountdownPosition1(spline, obj);
             }
-          }).catch((error) => {
+          })
+          .catch((error) => {
             console.error("Error loading Spline scene:", error);
           });
-        }
+      } else {
+        this.splineInstance.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode', {
+          credentials: 'include',
+          mode: 'no-cors',
+        })
+          .then(() => {
+            const obj = this.splineInstance.findObjectById('a6450dc5-4d27-43ad-837a-c72978938638');
+            console.log("Aqui", JSON.stringify(obj?.position));
+            if (obj) {
+              this.splineObject = obj;
+              this.updateCountdownPosition(obj.position.x, obj.position.y);
+            }
+          })
+          .catch((error) => {
+            console.error("Error loading Spline scene:", error);
+          });
+      }
+    }
   }
 
   private initializeCountdown() {
@@ -73,10 +95,21 @@ export class CountdownComponent implements OnInit, AfterViewInit {
       const canvasCenterX = this.canvas3dRef.nativeElement.offsetWidth / 2;
       const canvasCenterY = this.canvas3dRef.nativeElement.offsetHeight / 2;
 
-      console.log(canvasCenterX);
-      console.log(canvasCenterY);
-      const actualX = canvasCenterX - x -100;
-      const actualY = canvasCenterY + 280;
+      // Find the size of the countdown element
+      const countdownWidth = this.countdownRef.nativeElement.offsetWidth;
+      const countdownHeight = this.countdownRef.nativeElement.offsetHeight;
+
+      console.log(x)
+      console.log(y)
+      console.log(canvasCenterX)
+      console.log(canvasCenterY)
+      console.log(countdownWidth)
+      console.log(countdownHeight)
+
+
+      const actualX = canvasCenterX - countdownWidth/2;
+      // mais header height/2
+      const actualY = canvasCenterY + countdownHeight*2 + 36 ;
 
       this.renderer.setStyle(this.countdownRef.nativeElement, 'left', `${actualX}px`);
       this.renderer.setStyle(this.countdownRef.nativeElement, 'top', `${actualY}px`);
