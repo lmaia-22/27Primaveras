@@ -10,19 +10,16 @@ export const routes: Routes = [
       redirectTo: 'home',
       pathMatch: 'full',
     },
-  
     {
       path: 'home',
       pathMatch: 'full',
       component: HomeComponent,
     },
-  
     {
       path: 'guest-list',
       pathMatch: 'full',
       component: GuestListComponent,
     },
-  
     {
       path: 'venue',
       pathMatch: 'full',
