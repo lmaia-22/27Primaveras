@@ -28,8 +28,8 @@ export class HeaderComponent {
               {label: 'Guest List', icon: 'pi pi-fw pi-user', command:(click)=>{this.router.navigate(['/guest-list'])}},
               {label: 'Venue', icon: 'pi pi-spin pi-spinner' },
           ];
-          this.activeItem;
           this.initializeCountdown();
+          this.activeItem = this.items[0];
       }
 
       private initializeCountdown() {
