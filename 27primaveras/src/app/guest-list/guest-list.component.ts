@@ -27,11 +27,7 @@ export class GuestListComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       const canvas = this.canvas3dRef.nativeElement;
       this.splineInstance = new Application(canvas);
-        this.splineInstance.load('https://prod.spline.design/l1ugiSEJVFtp3ghG/scene.splinecode', 
-        {
-          credentials: 'include',
-          mode: 'no-cors',
-        })
+        this.splineInstance.load('https://prod.spline.design/l1ugiSEJVFtp3ghG/scene.splinecode')
           .then(() => {
             this.renderer.setStyle(this.canvas3dRef.nativeElement, 'height', `${window.innerHeight}px` )
           })
