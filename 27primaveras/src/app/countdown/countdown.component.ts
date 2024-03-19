@@ -27,7 +27,11 @@ export class CountdownComponent implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       const canvas = this.canvas3dRef.nativeElement;
       this.splineInstance = new Application(canvas);
-        this.splineInstance.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode')
+        this.splineInstance.load('https://prod.spline.design/w8FYwcXj8fLMkVcW/scene.splinecode',
+        {
+          credentials: 'include',
+          mode: 'no-cors',
+        })
           .then(() => {
               this.renderer.setStyle(this.canvas3dRef.nativeElement, 'height', `${window.innerHeight}px` )
           })
