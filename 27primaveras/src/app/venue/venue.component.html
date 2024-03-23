@@ -6,10 +6,8 @@
             </div>
         </p-tabPanel>
         <p-tabPanel header="Location">
-            <div class="map-container">
-                <div class="map">
-                    <google-map [options]="options" />
-                </div>
+            <div #mapContainer class="map-container">
+                <google-map [options]="options" [width]="mapWidth" [height]="mapHeight"/>
             </div>
         </p-tabPanel>
         <p-tabPanel header="Seating Plan">

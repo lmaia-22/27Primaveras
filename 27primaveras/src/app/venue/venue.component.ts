@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { GoogleMapsModule, GoogleMap } from '@angular/google-maps';
 import { TabViewModule } from 'primeng/tabview';
@@ -16,6 +16,7 @@ import { ImageModule } from 'primeng/image';
   ],
 })
 export class VenueComponent implements OnInit, AfterViewInit {
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
   @ViewChild(GoogleMap, { static: false })
   mapComponent!: GoogleMap;
 
@@ -29,9 +30,16 @@ export class VenueComponent implements OnInit, AfterViewInit {
       { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
     ]
   };
+  mapWidth!: string;
+  mapHeight!: string;
   directionsService: any
   directionsRenderer: any
+
+  constructor(private renderer: Renderer2) {}
+  
   ngOnInit(): void {
+    this.mapWidth = `${window.innerWidth-30}px`;
+    this.mapHeight = `${window.innerHeight-145}px`;
   }
 
   ngAfterViewInit(): void {
@@ -50,9 +58,7 @@ export class VenueComponent implements OnInit, AfterViewInit {
         map: this.mapComponent.googleMap,
         icon: {
           url: "https://lmaia-22.github.io/27Primaveras/favicon.ico",
-          scaledSize: new google.maps.Size(25, 25), // scaled size
-          origin: new google.maps.Point(0,0), // origin
-          anchor: new google.maps.Point(0, 0) // anchor
+          scaledSize: new google.maps.Size(20, 20)
         }
       });
       marker.addListener("click", () => {
@@ -91,6 +97,11 @@ export class VenueComponent implements OnInit, AfterViewInit {
       window.alert("Geolocation is not supported by this browser.");
     }
   }
-  
+
+@HostListener('window:resize', ['$event'])
+  onResize() {
+    this.mapWidth = `${window.innerWidth-30}px`;
+    this.mapHeight = `${window.innerHeight-145}px`;
+  }
 
 }
