@@ -1,32 +1,19 @@
-<div class="card">
+<div class="tabview-wrapper card center">
     <p-tabView>
         <p-tabPanel header="Menu">
+            <div class="card flex justify-content-center">
+                <p-image src="https://lmaia-22.github.io/27Primaveras/assets/menu.jpeg" alt="Image" width="100%" [preview]="true"></p-image>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Location">
-            <google-map 
-                [style.height.%]="100"
-                [style.width.%]="100"
-                [center]="center"
-                [zoom]="zoom"
-                (mapClick)="moveMap($event)"
-                (mapMousemove)="move($event)">
-            </google-map>
+            <div class="map-container">
+                <div class="map">
+                    <google-map [options]="options" />
+                </div>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Seating Plan">
             <p class="m-0">Pending...</p>
         </p-tabPanel>
     </p-tabView>
-</div>
-
-<div class="card">
-    <p-galleria #galleria [(value)]="images" [(activeIndex)]="activeIndex" [numVisible]="5" [showThumbnails]="showThumbnails" [showItemNavigators]="true" [showItemNavigatorsOnHover]="true" [circular]="true" [autoPlay]="true" [transitionInterval]="3000" [containerStyle]="{'width':'100%'}" [containerClass]="galleriaClass()"> 
-        <ng-template pTemplate="item" let-item>
-            <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
-        </ng-template>
-        <ng-template pTemplate="thumbnail" let-item>
-            <div class="grid grid-nogutter justify-content-center">
-                <img [src]="item.thumbnailImageSrc" style="display: block;" />
-            </div>
-        </ng-template>
-    </p-galleria>
 </div>
