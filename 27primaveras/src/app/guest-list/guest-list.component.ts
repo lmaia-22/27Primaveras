@@ -1,7 +1,4 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { AvatarModule } from 'primeng/avatar';
-import { CarouselModule } from 'primeng/carousel';
-import { Guests } from '../../domain/guests';
 import { Application } from '@splinetool/runtime';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
@@ -9,7 +6,7 @@ import { PLATFORM_ID, Inject } from '@angular/core';
 @Component({
   selector: 'app-guest-list',
   standalone: true,
-  imports: [AvatarModule, CarouselModule],
+  imports: [],
   templateUrl: './guest-list.component.html',
   styleUrl: './guest-list.component.less',
 })
