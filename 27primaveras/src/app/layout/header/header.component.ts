@@ -26,7 +26,8 @@ export class HeaderComponent {
           this.items = [
               {label: 'Home', icon: 'pi pi-fw pi-home', command:(click)=>{this.router.navigate(['/home'])}},
               {label: 'Guest List', icon: 'pi pi-fw pi-user', command:(click)=>{this.router.navigate(['/guest-list'])}},
-              {label: 'Venue', icon: 'pi pi-spin pi-spinner' },
+              {label: 'Venue', icon: 'pi pi-fw  pi-map', command:(click)=>{this.router.navigate(['/venue'])}},
+              {label: 'Gift', icon: 'pi pi-fw pi-gift' },
           ];
           this.initializeCountdown();
           this.activeItem = this.items[0];
