@@ -3,6 +3,7 @@ import { CountdownComponent } from 'ngx-countdown';
 import { GuestListComponent } from './guest-list/guest-list.component';
 import { VenueComponent } from './venue/venue.component';
 import { HomeComponent } from './home/home.component';
+import { GiftComponent } from './gift/gift.component';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,10 @@ export const routes: Routes = [
       path: 'venue',
       pathMatch: 'full',
       component: VenueComponent,
+    },
+    {
+      path: 'gift',
+      pathMatch: 'full',
+      component: GiftComponent,
     },
   ];

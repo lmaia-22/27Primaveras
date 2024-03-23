@@ -12,7 +12,7 @@ import { PLATFORM_ID, Inject } from '@angular/core';
 })
 export class GiftComponent implements AfterViewInit {
 
-  @ViewChild('canvas3d2') canvas3dRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas3d2') canvas3d2Ref!: ElementRef<HTMLCanvasElement>;
   splineInstance!: Application;
   splineObject!: Object;
 
@@ -22,7 +22,7 @@ export class GiftComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const canvas = this.canvas3dRef.nativeElement;
+      const canvas = this.canvas3d2Ref.nativeElement;
       this.splineInstance = new Application(canvas);
         this.splineInstance.load('https://prod.spline.design/8pSXywELVcGC3Lq2/scene.splinecode',
         {
@@ -30,7 +30,7 @@ export class GiftComponent implements AfterViewInit {
           mode: 'no-cors',
         })
           .then(() => {
-            this.renderer.setStyle(this.canvas3dRef.nativeElement, 'height', `${window.innerHeight}px` )
+            this.renderer.setStyle(this.canvas3d2Ref.nativeElement, 'height', `${window.innerHeight}px` )
           })
           .catch((error) => {
             console.error("Error loading Spline scene:", error);

@@ -22,34 +22,35 @@ export class HeaderComponent {
   constructor(private router: Router) {}
   leftTime!: number;
   config!: CountdownConfig;
-      ngOnInit() {
-          this.items = [
-              {label: 'Home', icon: 'pi pi-fw pi-home', command:(click)=>{this.router.navigate(['/home'])}},
-              {label: 'Guest List', icon: 'pi pi-fw pi-user', command:(click)=>{this.router.navigate(['/guest-list'])}},
-              {label: 'Venue', icon: 'pi pi-fw  pi-map', command:(click)=>{this.router.navigate(['/venue'])}},
-              {label: 'Gift', icon: 'pi pi-fw pi-gift' },
-          ];
-          this.initializeCountdown();
-          this.activeItem = this.items[0];
-      }
 
-      private initializeCountdown() {
-        const targetDate = new Date(Date.UTC(2024, 3, 21, 23, 59, 0)); // 22 April 2024
-        const now = new Date();
-        this.leftTime = Math.round((targetDate.getTime() - now.getTime()) / 1000);
-    
-        this.config = {
-          leftTime: this.leftTime,
-          formatDate: ({ date }) => {
-            let duration = Number(date || 0);
-            let seconds = Math.floor((duration / 1000) % 60);
-            let minutes = Math.floor((duration / 1000 / 60) % 60);
-            let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-            let days = Math.floor(duration / (1000 * 60 * 60 * 24));
-            
-            let formatted = `${days} days ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            return formatted;
-          },
-        };
-      }
+  ngOnInit() {
+    this.items = [
+        {label: 'Home', icon: 'pi pi-fw pi-home', command:(click)=>{this.router.navigate(['/home'])}},
+        {label: 'Guest List', icon: 'pi pi-fw pi-user', command:(click)=>{this.router.navigate(['/guest-list'])}},
+        {label: 'Venue', icon: 'pi pi-fw  pi-map', command:(click)=>{this.router.navigate(['/venue'])}},
+        {label: 'Gift', icon: 'pi pi-fw pi-gift', command:(click)=>{this.router.navigate(['/gift'])}},
+    ];
+    this.activeItem = this.items[0];
+    this.initializeCountdown();
+  }
+
+  private initializeCountdown() {
+    const targetDate = new Date(Date.UTC(2024, 3, 21, 23, 59, 0)); // 22 April 2024
+    const now = new Date();
+    this.leftTime = Math.round((targetDate.getTime() - now.getTime()) / 1000);
+
+    this.config = {
+      leftTime: this.leftTime,
+      formatDate: ({ date }) => {
+        let duration = Number(date || 0);
+        let seconds = Math.floor((duration / 1000) % 60);
+        let minutes = Math.floor((duration / 1000 / 60) % 60);
+        let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+        let days = Math.floor(duration / (1000 * 60 * 60 * 24));
+        
+        let formatted = `${days} days ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        return formatted;
+      },
+    };
+  }
 }

@@ -13,10 +13,8 @@ import { isPlatformBrowser } from '@angular/common';
 export class CountdownComponent implements AfterViewInit {
 
   @ViewChild('canvas3d') canvas3dRef!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('countdown', { static: false }) countdownRef!: ElementRef;
   splineInstance!: Application;
   splineObject!: Object;
-  canvasLoaded: boolean = false;
   
   constructor(
     private renderer: Renderer2,
